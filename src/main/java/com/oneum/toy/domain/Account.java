@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Data
+@Getter @Setter
 public class Account {
 
     @Id
@@ -24,4 +24,6 @@ public class Account {
 
     @NotEmpty
     private String password;
+
+
 }

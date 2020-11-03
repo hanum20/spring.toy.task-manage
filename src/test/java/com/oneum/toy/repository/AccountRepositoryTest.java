@@ -1,25 +1,33 @@
 package com.oneum.toy.repository;
 
 import com.oneum.toy.domain.Account;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.jupiter.api.Assertions.*;
+@Slf4j
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class AccountRepositoryTest {
 
-@ExtendWith(MockitoExtension.class)
-class AccountRepositoryTest {
-
-    @Mock
+    @Autowired
     private AccountRepository accountRepository;
 
+
     @Test
-    @DisplayName("Account Save Test")
     public void save_account() {
         Account account = new Account();
+        account.setPassword("123123");
+        account.setUsername("oneum");
+
+        accountRepository.save(account);
+
+        Account account0 = accountRepository.findByUsername("oneum");
+        log.info(account0.getPassword());
+
     }
 
 }
