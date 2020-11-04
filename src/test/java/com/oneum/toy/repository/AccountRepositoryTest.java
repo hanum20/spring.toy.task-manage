@@ -23,10 +23,23 @@ public class AccountRepositoryTest {
         account.setPassword("123123");
         account.setUsername("oneum");
 
+        // Create
         accountRepository.save(account);
 
+        // Read
         Account account0 = accountRepository.findByUsername("oneum");
-        log.info(account0.getPassword());
+        log.info("Read: " + account0.getPassword());
+
+        // Update
+        account.setUsername("Han");
+        Account savedAccount = accountRepository.save(account);
+        log.info("Update: " + savedAccount.getUsername());
+
+        // Delete
+        accountRepository.delete(account);
+        accountRepository.findByUsername("Han");
+        log.info("Delete: " + accountRepository.findAll().toString());
+
 
     }
 
