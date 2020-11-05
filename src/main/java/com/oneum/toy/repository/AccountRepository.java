@@ -9,6 +9,8 @@ public interface AccountRepository extends Repository<Account, Long> {
 
     public Account findByUsername(String username);
 
+    public Account findById(Long id);
+
     public List<Account> findAll();
 
     public Account save(Account account);
