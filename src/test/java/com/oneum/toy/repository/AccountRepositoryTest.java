@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
+import java.util.Optional;
+
 @Slf4j
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -19,7 +22,7 @@ public class AccountRepositoryTest {
 
     @Test
     public void save_account() {
-        Account account = new Account();
+        Account account = Account.builder().username("oneum").password("123123").roles(Collections.singletonList("ROLE_USER")).build();
         account.setPassword("123123");
         account.setUsername("oneum");
 
@@ -27,8 +30,8 @@ public class AccountRepositoryTest {
         accountRepository.save(account);
 
         // Read
-        Account account0 = accountRepository.findByUsername("oneum");
-        log.info("Read: " + account0.getPassword());
+        Optional<Account> account0 = accountRepository.findByUsername("oneum");
+        log.info("Read: " + account0.get().toString());
 
         // Update
         account.setUsername("Han");
